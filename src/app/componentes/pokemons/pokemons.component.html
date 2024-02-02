@@ -1,1 +1,50 @@
-<p>Hola desde el componente de pokemons.</p>
+<!-- pokemons.component.html -->
+
+<!-- Contenedor principal con estilos -->
+<div class="container py-5 mt-5 mb-5 bg-info">
+
+    <!-- Encabezado -->
+    <h2 class="title is-2 has-text-centered">Los Pokémon que tenemos en el array:</h2>
+    <hr />
+
+    <!-- Lista de Pokémon -->
+    <div class="columns is-multiline is-centered">
+        <!-- Iteración sobre el array de Pokémon -->
+        <div class="column is-one-third" *ngFor="let pokemon of pokemons">
+            <!-- Caja que contiene la información de cada Pokémon -->
+            <div class="box">
+
+                <!-- Fotografía del Pokémon -->
+                <div class="has-text-centered">
+                    <!-- Uso de la propiedad [src] para la ruta de la imagen -->
+                    <img [src]="'./assets/img_pokemon_practica/' + pokemon.id + '.png'" alt="{{ pokemon.nombre }}" />
+                </div>
+
+                <!-- Detalles del Pokémon -->
+                <div class="content">
+                    <!-- Nombre del Pokémon -->
+                    <p class="subtitle is-4">{{ pokemon.nombre }}</p>
+
+                    <!-- Lista de detalles del Pokémon -->
+                    <ul>
+                        <!-- Categoría del Pokémon -->
+                        <li><strong>Categoría: </strong> <span *ngIf="pokemon.categoria; else na">{{ pokemon.categoria
+                                }}</span><ng-template #na>N/A</ng-template></li>
+
+                        <!-- Tipo del Pokémon -->
+                        <li><strong>Tipo: </strong> <span *ngIf="pokemon.tipo; else na">{{ pokemon.tipo
+                                }}</span><ng-template #na>N/A</ng-template></li>
+
+                        <!-- Talla del Pokémon -->
+                        <li><strong>Talla: </strong> <span *ngIf="pokemon.talla !== undefined; else na">{{ pokemon.talla
+                                | number:'1.0' }} m</span><ng-template #na>N/A</ng-template></li>
+
+                        <!-- Peso del Pokémon -->
+                        <li><strong>Peso: </strong> <span *ngIf="pokemon.peso !== undefined; else na">{{ pokemon.peso
+                                | number:'1.0' }} kg</span><ng-template #na>N/A</ng-template></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
